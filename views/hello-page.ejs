@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="menu">
+            <div class="wrapper">
+                <nav class="nav">
+                    <h1 class="header-logo">
+                        <a href="/">Places App</a>
+                    </h1>
+    
+                    <a href="/login-page" class="login-link">Login</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="wrapper">
+            <div class="hello-container">
+                <div class="hello-content">
+                    <h2 class="hello-title">
+                        this is hello page of <br>places app  
+                    </h2>
+                    <div class="hello-text">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam itaque veritatis in.
+                             Illo, dolores vitae eos aliquam mollitia doloremque ut laborum dolorem autem laboriosam 
+                             aperiam quis, odio fuga officia? Aspernatur!
+                        </p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam itaque veritatis in.
+                            Illo, dolores vitae eos aliquam mollitia doloremque ut laborum dolorem autem laboriosam 
+                            aperiam quis, odio fuga officia? Aspernatur!
+                       </p>
+                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam itaque veritatis in.
+                        Illo, dolores vitae eos aliquam mollitia doloremque ut laborum dolorem autem laboriosam 
+                        aperiam quis, odio fuga officia? Aspernatur!
+                       </p>
+                    </div>
+                
+                </div>
+                <div class="hello-form">
+                    <form action="/auth/register" class="form reg-form" method="post">
+                        <h2 class="form-title">Sign up form</h2>
+                        <div class="form-control">
+                            <label for="reg-username-input">username</label><br>
+                            <input type="text" name="username" id="reg-username-input" >
+                            <div class="form-field-error reg-username-error">
+
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label for="reg-password-input">password</label><br>
+                            <input type="password" name="password" id="reg-password-input" >
+                            <div class="form-field-error reg-password-error">
+                                
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label for="reg-email-input">email</label><br>
+                            <input type="email" name="email" id="reg-email-input" >
+                            <div class="form-field-error reg-email-error">
+                            </div>
+                        </div>
+
+                        <div class="<%= regErrors.length ? 'form-error' : '' %>">
+                            <%= regErrors %>
+                        </div>
+
+                        <button class="form-btn" type="submit">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/hello-page.js"></script>
+    
+</body>
+</html>
