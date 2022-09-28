@@ -82,6 +82,18 @@ app.post('/create_post', uploadFile.single('picture'), (req, res) => {
 
 });
 
+app.get('/edit-place/:id', (req, res) => {
+    const {user} = req.session;
+    PlaceModel
+        .findOne({_id: req.params.id})
+        .then(place => {
+            res.render('edit-page', {user, place})
+        })
+        .catch(err => {
+            console.log(err);
+        })
+})
+
 
 const PORT = process.env.PORT || 3000;
 

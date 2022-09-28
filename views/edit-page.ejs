@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="menu">
+            <div class="wrapper">
+                <nav class="nav">
+                    <h1 class="header-logo">
+                        <a href="/">Places App</a>
+                    </h1>
+    
+                    <div class="user-hello">
+                        <div class="username">
+                            Hello, <%= user.username %>
+                        </div>
+                        <form action="/auth/logout" method="post">
+                            <button type="submit" class="logout-btn">Logout</button>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="wrapper">
+            
+            <div class="edit-container">
+                <form class="form edit-place-form" method="post">
+                    <h2 class="form-title">Edit place</h2>
+                    <div class="form-control">
+                        <label for="edit-place-name-input">Name </label><br>
+                        <input type="text" name="name" value="<%= place.name %>" id="edit-place-name-input" >
+                        <div class="form-field-error edit-place-name-error">
+        
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label for="edit-place-locations-input">Location</label><br>
+                        <input type="text" name="locations" value="<%= place.location %>" id="edit-place-locations-input" >
+                        <div class="form-field-error edit-place-locations-error">
+                            
+                        </div>
+                    </div>
+        
+                    <div class="form-control">
+                        <label for="edit-place-rating-input">Rating</label><br>
+                        <div class="form-star">
+                            <div class="star">
+                                      <label class="rating-label" id="rating-label">
+                                          ★
+                                          <input type="radio" name="note" value="1" id="aze">
+                                        </label>
+                                     
+                                      <label class="rating-label" id="rating-label">
+                                          ★
+                                          <input type="radio" name="note" value="2">
+                                        </label>
+                                      <label class="rating-label" id="rating-label">
+                                          ★
+                                          <input type="radio" name="note" value="3">
+                                        </label>
+                                      <label class="rating-label" id="rating-label">
+                                          ★
+                                          <input type="radio" name="note" value="4">
+                                        </label>
+                                      <label class="rating-label" id="rating-label">
+                                          ★
+                                          <input type="radio" name="note" value="5">
+                                        </label>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label for="edit-place-picture-input" class="picture-label">Load image</label>
+                        <span id="file-selected"></span>
+                        <input type="file" name="picture" 
+                               id="edit-place-picture-input" class="place-picture-input" accept="image/*" >
+                        <div class="form-field-error place-picture-error">
+                            
+                        </div>
+                    </div>
+
+    
+        
+                    <div class="form-control">
+                        <label for="edit-place-description-input">description</label><br>
+                        <textarea name="description" id="edit-place-description-input"
+                                  class="place-description-input" ><%= place.description %>
+                                </textarea>
+                        <div class="form-field-error place-description-error">
+                            
+                        </div>
+                    </div>
+        
+                    <div class="">
+        
+                    </div>
+        
+                    <div class="edit-btns">
+                        <button class="form-btn" type="submit">Edit</button>
+                        <button class="form-btn del-btn" type="submit">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/hello-page.js"></script>
+    
+</body>
+</html>

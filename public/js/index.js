@@ -14,30 +14,7 @@ const placeLocationError = document.querySelector('.place-locations-error');
 const placeDescriptionError = document.querySelector('.place-description-error');
 const placePictureError = document.querySelector('.place-picture-error');
 
-const ratingStars = [...document.querySelectorAll('.rating-star')];
-
-
-
-function executeRating(stars) {
-    const activeRating = 'star-solid';
-    const inActiveRating = 'star-regular';
-    const starsLength = stars.length;
-    let i;
-    stars.map(star => {
-        star.onclick = (event) => {
-            console.log(star)
-            i = stars.indexOf(star);
-            if (star.src.includes(inActiveRating)){
-                for (i; i >= 0; --i) stars[i].src = stars[i].src.replace(inActiveRating, activeRating)
-            } else {
-                for (i; i < starsLength; ++i) stars[i].src = stars[i].src.replace(activeRating, inActiveRating)
-            }
-        }
-    })
-}
-
-
-executeRating(ratingStars);
+let placeRating = 0;
 
 
 function validateForm() {
@@ -89,7 +66,7 @@ placeForm.addEventListener("submit", (event) => {
         form.append('name',placeNameInput.value);
         form.append('location', placeLocationInput.value);
         form.append('description', placeDescriptionInput.value);
-        form.append('rating', placeRatingInput.value);
+        form.append('rating', placeRating);
         
         if (file) {
             form.append('picture', file, file.name)
@@ -158,3 +135,71 @@ placePictureInput.addEventListener('change', event => {
     console.log(event.target)
     fileSelected.textContent = event.target.files[0].name;
 });
+
+
+
+
+/* Rating Stars */
+
+
+const classStarInactive = "inactive-star";
+const classStarActive = "active-star";
+
+const stars = document.querySelectorAll("#rating-label");
+const starsInput = document.querySelectorAll("#rating-label > input");
+
+
+
+function activeStar(event) {
+    let currStarActive = event.target;
+    let currStarInactive = event.target;
+
+    if (event.type = "mouseenter" || !event.target.control.checked) {
+        while (currStarActive != null) {
+            currStarActive.classList.add(classStarActive);
+            currStarActive = currStarActive.previousElementSibling;
+        }
+
+
+        while( (currStarInactive = currStarInactive.nextElementSibling) != null) {
+            currStarInactive.classList.remove(classStarActive);
+        }
+    } else {
+        event.preventDefault();
+    }
+}
+
+
+function inactiveStar(event) {
+    let starNode = event.target.parentNode.querySelectorAll('label');
+    let currLabel = starNode[starNode.length - 1];
+
+    console.log(currLabel)
+
+    starNode.forEach(function (star) {
+        star.classList.add(classStarActive);
+    })
+
+    while (currLabel != null && !currLabel.control.checked) {
+        currLabel.classList.remove(classStarActive)
+        currLabel = currLabel.previousElementSibling;
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    stars.forEach(star => {
+        star.classList.remove(classStarActive);
+        star.addEventListener('click', activeStar);
+        star.addEventListener('mouseenter', activeStar);
+        star.addEventListener('mouseout', inactiveStar);
+    })
+
+    starsInput.forEach(sInput => {
+        sInput.addEventListener('click', function(event) {
+            placeRating = parseInt(event.target.value);
+            event.stopPropagation();
+
+        })
+    })
+})

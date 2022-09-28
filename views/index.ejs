@@ -49,19 +49,36 @@
 
             <div class="form-control">
                 <label for="place-rating-input">Rating</label><br>
-                <div class="rating-box">
-                    <img src="/images/svg/star-regular.svg" alt="" class="rating-star star-ico">
-                    <img src="/images/svg/star-regular.svg" alt="" class="rating-star star-ico">
-                    <img src="/images/svg/star-regular.svg" alt="" class="rating-star star-ico">
-                    <img src="/images/svg/star-regular.svg" alt="" class="rating-star star-ico">
-                    <img src="/images/svg/star-regular.svg" alt="" class="rating-star star-ico">
-                    
+                <div class="form-star">
+                    <div class="star">
+                              <label class="rating-label" id="rating-label">
+                                  ★
+                                  <input type="radio" name="note" value="1" id="aze">
+                                </label>
+                             
+                              <label class="rating-label" id="rating-label">
+                                  ★
+                                  <input type="radio" name="note" value="2">
+                                </label>
+                              <label class="rating-label" id="rating-label">
+                                  ★
+                                  <input type="radio" name="note" value="3">
+                                </label>
+                              <label class="rating-label" id="rating-label">
+                                  ★
+                                  <input type="radio" name="note" value="4">
+                                </label>
+                              <label class="rating-label" id="rating-label">
+                                  ★
+                                  <input type="radio" name="note" value="5">
+                                </label>
+                            </div>
                 </div>
             </div>
             <div class="form-control">
                 <label for="place-picture-input" class="picture-label">Load image</label>
                 <span id="file-selected"></span>
-                <input type="file" name="picture" id="place-picture-input" accept="image/*" >
+                <input type="file" name="picture" id="place-picture-input" class="place-picture-input" accept="image/*" >
                 <div class="form-field-error place-picture-error">
                     
                 </div>
@@ -69,7 +86,7 @@
 
             <div class="form-control">
                 <label for="place-description-input">description</label><br>
-                <textarea name="description" id="place-description-input" ></textarea>
+                <textarea name="description" id="place-description-input" class="place-description-input" ></textarea>
                 <div class="form-field-error place-description-error">
                     
                 </div>
@@ -98,20 +115,31 @@
                                 <div class="place-header">
                                     <div class="place-info">
                                         <div class="place-name">
-                                            Name: <span><%= place.name %></span>
+                                            Name: 
+                                            <a href="/edit-place/<%= place._id %>" class="edit-link">
+                                                <%= place.name %>
+                                            </a> 
                                         </div>
                                         <div class="place-location">
                                             Location: <span><%= place.location %></span>
                                         </div>
                                         <div class="rating">
                                             Rating: 
-                                            <% for(let i = 1; i <= 5; i++) { %>
-                                                <% if (i <= place.rating) { %>
-                                                     <img src="/images/svg/star-solid.svg" alt="" class="star-ico">       
-                                                <%} else { %>
-                                                    <img src="/images/svg/star-regular.svg" alt="" class="star-ico">
+                                            <div>
+                                                <% for(let i = 1; i <= 5; i++) { %>
+                                                    <% if (i <= place.rating) { %>
+                                                        <label class="rating-label active-star">
+                                                            ★
+                                                            <input type="radio" name="note">
+                                                          </label>       
+                                                    <%} else { %>
+                                                        <label class="rating-label">
+                                                            ★
+                                                            <input type="radio" name="note">
+                                                          </label>
+                                                    <%} %>
                                                 <%} %>
-                                            <%} %>   
+                                            </div>   
                                         </div>
                                     </div>
         
