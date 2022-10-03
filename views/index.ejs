@@ -41,7 +41,7 @@
             </div>
             <div class="form-control">
                 <label for="place-locations-input">Location</label><br>
-                <input type="text" name="locations" id="place-locations-input" >
+                <input type="text" name="location" id="place-locations-input" >
                 <div class="form-field-error place-locations-error">
                     
                 </div>
@@ -116,7 +116,7 @@
                                     <div class="place-info">
                                         <div class="place-name">
                                             Name: 
-                                            <a href="/edit-place/<%= place._id %>" class="edit-link">
+                                            <a href="/edit-place-page/<%= place._id %>" class="edit-link">
                                                 <%= place.name %>
                                             </a> 
                                         </div>
@@ -166,6 +166,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    
+    <script src="/js/utils.js"></script>
     <script src="/js/index.js"></script>
 
 

@@ -732,6 +732,12 @@ img {
 
 .edit-btns {
     display: flex;
+    justify-content: space-between;
+}
+
+
+.del-form {
+    width: 50%;
 }
 
 .del-btn {

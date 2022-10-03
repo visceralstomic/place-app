@@ -82,7 +82,7 @@ app.post('/create_post', uploadFile.single('picture'), (req, res) => {
 
 });
 
-app.get('/edit-place/:id', (req, res) => {
+app.get('/edit-place-page/:id', (req, res) => {
     const {user} = req.session;
     PlaceModel
         .findOne({_id: req.params.id})
@@ -92,6 +92,42 @@ app.get('/edit-place/:id', (req, res) => {
         .catch(err => {
             console.log(err);
         })
+})
+
+
+app.post('/delete-place/:id', (req, res) => {
+    const {user} = req.session;
+    PlaceModel
+        .findOneAndDelete({_id: req.params.id})
+        .then(place => {
+            res.redirect('/')
+        })
+        .catch(err => {
+            console.log(err);
+        })
+})
+
+
+app.post('/edit-place/:id', uploadFile.single('picture'), (req, res) => {
+    const {user} = req.session;
+    const placeData = req.body;
+
+    if(req.file) {
+        placeData['picture'] = req.file.filename;
+    }    
+
+    PlaceModel
+        .findOneAndUpdate(
+            {_id: req.params.id},
+            placeData,
+            {new: true, runValidators: true}
+        )
+        .then(place => {
+            res.redirect('/');
+        })
+        .catch(err => {
+            console.log(err);
+        }) 
 })
 
 

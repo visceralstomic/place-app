@@ -48,7 +48,10 @@ function validateForm() {
 function createStarRating(rating) {
     let htmlRating = '';
     for(let i = 1; i <= 5; i++) {
-        htmlRating +=  `<img src="/images/svg/star-${ i <= rating ? 'solid' : 'regular'}.svg" alt="" class="star-ico">`
+        htmlRating +=  `<label class="rating-label ${i <= rating ? 'active-star' : ''}">
+        ★
+        <input type="radio" name="note">
+      </label>`
     }
 
     return htmlRating
@@ -90,7 +93,10 @@ placeForm.addEventListener("submit", (event) => {
                 <div class="place-header">
                     <div class="place-info">
                         <div class="place-name">
-                            Name: <span>${place.name}</span>
+                            Name: 
+                            <a href="/edit-place-page/${place._id}" class="edit-link">
+                                                ${place.name}
+                            </a> 
                         </div>
                         <div class="place-location">
                             Location: <span>${place.location}</span>
@@ -132,7 +138,6 @@ placeForm.addEventListener("submit", (event) => {
 }); 
 
 placePictureInput.addEventListener('change', event => {
-    console.log(event.target)
     fileSelected.textContent = event.target.files[0].name;
 });
 
@@ -148,43 +153,6 @@ const classStarActive = "active-star";
 const stars = document.querySelectorAll("#rating-label");
 const starsInput = document.querySelectorAll("#rating-label > input");
 
-
-
-function activeStar(event) {
-    let currStarActive = event.target;
-    let currStarInactive = event.target;
-
-    if (event.type = "mouseenter" || !event.target.control.checked) {
-        while (currStarActive != null) {
-            currStarActive.classList.add(classStarActive);
-            currStarActive = currStarActive.previousElementSibling;
-        }
-
-
-        while( (currStarInactive = currStarInactive.nextElementSibling) != null) {
-            currStarInactive.classList.remove(classStarActive);
-        }
-    } else {
-        event.preventDefault();
-    }
-}
-
-
-function inactiveStar(event) {
-    let starNode = event.target.parentNode.querySelectorAll('label');
-    let currLabel = starNode[starNode.length - 1];
-
-    console.log(currLabel)
-
-    starNode.forEach(function (star) {
-        star.classList.add(classStarActive);
-    })
-
-    while (currLabel != null && !currLabel.control.checked) {
-        currLabel.classList.remove(classStarActive)
-        currLabel = currLabel.previousElementSibling;
-    }
-}
 
 
 document.addEventListener('DOMContentLoaded', function() {
