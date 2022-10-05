@@ -399,7 +399,14 @@ a {
     margin-top: 7px;
 }
 
-
+.success-msg {
+    text-align: center;
+    border: 1px solid #3CCF4E;
+    padding: 5px 0;
+    color: #3CCF4E;
+    background-color: #D9F8C4;
+    margin-bottom: 10px;
+}
 
 .wrapper {
     max-width: 1200px;
@@ -558,11 +565,11 @@ a {
 .places-form-container {
     position: fixed;
     height: 100%;
-    top: 0;
+    top: 70px;
     left: 0;
     width: var(--places-form-cont-width);
     background-color: var(--black-color);
-    padding: 100px 10px 0 10px;
+    padding: 20px 10px 0 10px;
     z-index: 3;
     overflow: auto;
     scrollbar-color: rebeccapurple green;
@@ -571,6 +578,7 @@ a {
 
 .index-container {
     margin-left: var(--places-form-cont-width);
+    position: relative;
 }
 
 

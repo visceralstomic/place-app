@@ -25,7 +25,7 @@ const register = (req, res) => {
         
         req.flash('regErrors', errorMsg);
         req.session.save(function () {
-            res.redirect('/')
+            res.redirect('/places')
         })
         
      }); 
@@ -49,7 +49,7 @@ const login =  (req, res) => {
             
                     req.session.save(function(err) {
                         if (err) next(err);
-                        res.redirect('/')
+                        res.redirect('/places')
                     })
                 })
             } else {
@@ -67,7 +67,7 @@ const login =  (req, res) => {
 
 const logout = async (req, res) => {
     req.session.destroy(function (){
-        res.redirect('/');
+        res.redirect('/places');
     })
 }
 

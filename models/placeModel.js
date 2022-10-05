@@ -6,18 +6,22 @@ const placeSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Please provide name of place"],
-        maxlength: 70
+        maxlength: [70, 'Name value must be no bigger than 70 characters']
     },
     location: {
         type: String,
         required: [true, "Please provide name of location"],
-        maxlength: 70
+        maxlength: [70, 'Location value must be no bigger than 70 characters']
     },
-    picture: String,
+    picture: {
+        type: String,
+        default: "empty.png"
+    },
     description:  {
         type: String,
+        trim: true,
         required: [true, "Please provide name of description"],
-        minlength: 10
+        minlength: [10, 'Description Value must be at least 10 characters long']
     },
     rating: {
         type: Number,

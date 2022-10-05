@@ -8,6 +8,8 @@ const regEmailError = document.querySelector('.reg-email-error');
 const formError = document.querySelector('.form-error');
 
 
+
+
 regForm.addEventListener('submit', event => {
     const usernameValue = regUsernameInput.value;
     const passwordValue = regPasswordInput.value;

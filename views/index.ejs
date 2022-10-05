@@ -14,7 +14,7 @@
             <div class="wrapper">
                 <nav class="nav">
                     <h1 class="header-logo">
-                        <a href="/">Places App</a>
+                        <a href="/places">Places App</a>
                     </h1>
                     <div class="user-hello">
                         <div class="username">
@@ -29,80 +29,81 @@
         </div>
     </header>
 
-    <div class="places-form-container">
-        <form class="form place-form" method="post">
-            <h2 class="form-title">Create place</h2>
-            <div class="form-control">
-                <label for="place-name-input">Name</label><br>
-                <input type="text" name="name"  id="place-name-input" >
-                <div class="form-field-error place-name-error">
-
-                </div>
-            </div>
-            <div class="form-control">
-                <label for="place-locations-input">Location</label><br>
-                <input type="text" name="location" id="place-locations-input" >
-                <div class="form-field-error place-locations-error">
-                    
-                </div>
-            </div>
-
-            <div class="form-control">
-                <label for="place-rating-input">Rating</label><br>
-                <div class="form-star">
-                    <div class="star">
-                              <label class="rating-label" id="rating-label">
-                                  ★
-                                  <input type="radio" name="note" value="1" id="aze">
-                                </label>
-                             
-                              <label class="rating-label" id="rating-label">
-                                  ★
-                                  <input type="radio" name="note" value="2">
-                                </label>
-                              <label class="rating-label" id="rating-label">
-                                  ★
-                                  <input type="radio" name="note" value="3">
-                                </label>
-                              <label class="rating-label" id="rating-label">
-                                  ★
-                                  <input type="radio" name="note" value="4">
-                                </label>
-                              <label class="rating-label" id="rating-label">
-                                  ★
-                                  <input type="radio" name="note" value="5">
-                                </label>
-                            </div>
-                </div>
-            </div>
-            <div class="form-control">
-                <label for="place-picture-input" class="picture-label">Load image</label>
-                <span id="file-selected"></span>
-                <input type="file" name="picture" id="place-picture-input" class="place-picture-input" accept="image/*" >
-                <div class="form-field-error place-picture-error">
-                    
-                </div>
-            </div>
-
-            <div class="form-control">
-                <label for="place-description-input">description</label><br>
-                <textarea name="description" id="place-description-input" class="place-description-input" ></textarea>
-                <div class="form-field-error place-description-error">
-                    
-                </div>
-            </div>
-
-            <div class="">
-
-            </div>
-
-            <button class="form-btn" type="submit">Create</button>
-        </form>
-    </div>
+    
 
     <div class="main">
         <div class="wrapper">
             <div class="index-container">
+                <div class="places-form-container">
+                    <form class="form place-form" method="post">
+                        <h2 class="form-title">Create place</h2>
+                        <div class="form-control">
+                            <label for="place-name-input">Name</label><br>
+                            <input type="text" name="name"  id="place-name-input" >
+                            <div class="form-field-error place-name-error">
+            
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label for="place-locations-input">Location</label><br>
+                            <input type="text" name="location" id="place-locations-input" >
+                            <div class="form-field-error place-locations-error">
+                                
+                            </div>
+                        </div>
+            
+                        <div class="form-control">
+                            <label for="place-rating-input">Rating</label><br>
+                            <div class="form-star">
+                                <div class="star">
+                                          <label class="rating-label" id="rating-label">
+                                              ★
+                                              <input type="radio" name="note" value="1" id="aze">
+                                            </label>
+                                         
+                                          <label class="rating-label" id="rating-label">
+                                              ★
+                                              <input type="radio" name="note" value="2">
+                                            </label>
+                                          <label class="rating-label" id="rating-label">
+                                              ★
+                                              <input type="radio" name="note" value="3">
+                                            </label>
+                                          <label class="rating-label" id="rating-label">
+                                              ★
+                                              <input type="radio" name="note" value="4">
+                                            </label>
+                                          <label class="rating-label" id="rating-label">
+                                              ★
+                                              <input type="radio" name="note" value="5">
+                                            </label>
+                                        </div>
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label for="place-picture-input" class="picture-label">Load image</label>
+                            <span id="file-selected"></span>
+                            <input type="file" name="picture" id="place-picture-input" class="place-picture-input" accept="image/*" >
+                            <div class="form-field-error place-picture-error">
+                                
+                            </div>
+                        </div>
+            
+                        <div class="form-control">
+                            <label for="place-description-input">description</label><br>
+                            <textarea name="description" id="place-description-input" class="place-description-input" ></textarea>
+                            <div class="form-field-error place-description-error">
+                                
+                            </div>
+                        </div>
+            
+                        <div class="" id="box-msg">
+            
+                        </div>
+            
+                        <button class="form-btn" type="submit">Create</button>
+                    </form>
+                </div>
                 <div class="places-list">
 
                     <% if (places.length === 0 ) { %>
@@ -116,7 +117,7 @@
                                     <div class="place-info">
                                         <div class="place-name">
                                             Name: 
-                                            <a href="/edit-place-page/<%= place._id %>" class="edit-link">
+                                            <a href="/places/<%= place._id %>/edit-page" class="edit-link">
                                                 <%= place.name %>
                                             </a> 
                                         </div>
@@ -144,7 +145,7 @@
                                     </div>
         
                                     <div class="place-picture">
-                                        <img src="/images/<%= place.picture %>" alt="">
+                                        <img src="/images/places/<%= place.picture %>" alt="">
                                     </div>
                                 </div>
                                  <div class="place-footer">

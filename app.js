@@ -2,26 +2,13 @@
 require('dotenv').config();
 
 const express = require('express');
-const path = require('path'); 
 const authRouter = require('./routes/auth');
+const mainRouter = require('./routes/main');
 const connectDB = require('./db/connectDB');
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
-const PlaceModel = require('./models/placeModel');
 const flash = require('connect-flash');
-const multer = require('multer');
 
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null,  path.resolve(__dirname, './public', 'images'))
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname)
-    }
-  })
-
-const uploadFile = multer({storage: storage})
 
 const app = express();
 
@@ -43,92 +30,14 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
 
 
-app.get('/', (req, res) => {
-    if (req.session.user) {
-        const {user} = req.session;
-        PlaceModel
-            .find({creator: user.id})
-            .then(places => {
-                res.render('index', {user, places})
-            })
-            .catch( error => console.log(error));
-    } else {
-        res.render('hello-page', {regErrors: req.flash('regErrors')});
-    }
-    
-});
+
 
 app.get('/login-page', (req, res) => {
     res.render('login-page', {errors: req.flash('errors')});
 })
 
 app.use('/auth', authRouter);
-
-app.post('/create_post', uploadFile.single('picture'), (req, res) => {
-    let placeBody = {...req.body};
-    placeBody['creator'] = req.session.user.id;
-    placeBody['picture'] = req.file.filename;
-
-    const placeObj = new PlaceModel(placeBody);
-
-    placeObj
-        .save()
-        .then(place => {
-            res.json(place)
-        })
-        .catch(error => {
-            console.log(error)
-        })
-
-});
-
-app.get('/edit-place-page/:id', (req, res) => {
-    const {user} = req.session;
-    PlaceModel
-        .findOne({_id: req.params.id})
-        .then(place => {
-            res.render('edit-page', {user, place})
-        })
-        .catch(err => {
-            console.log(err);
-        })
-})
-
-
-app.post('/delete-place/:id', (req, res) => {
-    const {user} = req.session;
-    PlaceModel
-        .findOneAndDelete({_id: req.params.id})
-        .then(place => {
-            res.redirect('/')
-        })
-        .catch(err => {
-            console.log(err);
-        })
-})
-
-
-app.post('/edit-place/:id', uploadFile.single('picture'), (req, res) => {
-    const {user} = req.session;
-    const placeData = req.body;
-
-    if(req.file) {
-        placeData['picture'] = req.file.filename;
-    }    
-
-    PlaceModel
-        .findOneAndUpdate(
-            {_id: req.params.id},
-            placeData,
-            {new: true, runValidators: true}
-        )
-        .then(place => {
-            res.redirect('/');
-        })
-        .catch(err => {
-            console.log(err);
-        }) 
-})
+app.use('/places', mainRouter);
 
 
 const PORT = process.env.PORT || 3000;

@@ -2,7 +2,6 @@
 const placeForm = document.querySelector('.place-form');
 const placeNameInput = document.querySelector('#place-name-input');
 const placeLocationInput = document.querySelector('#place-locations-input');
-const placeRatingInput = document.querySelector('#place-rating-input');
 const placeDescriptionInput = document.querySelector('#place-description-input');
 const placePictureInput = document.querySelector('#place-picture-input');
 const placeList = document.querySelector('.places-list');
@@ -13,36 +12,10 @@ const placeNameError = document.querySelector('.place-name-error');
 const placeLocationError = document.querySelector('.place-locations-error');
 const placeDescriptionError = document.querySelector('.place-description-error');
 const placePictureError = document.querySelector('.place-picture-error');
+const boxMsg = document.querySelector('#box-msg')
+
 
 let placeRating = 0;
-
-
-function validateForm() {
-    let isValid = true;
-
-    if (!placeNameInput.value.trim()) {
-        isValid = false;
-        placeNameError.textContent = 'Enter place name';
-    }
-
-    if (!placeLocationInput.value.trim()) {
-        isValid = false;
-        placeLocationError.textContent = 'Enter place location';
-    }
-    
-    if (!placeDescriptionInput.value.trim()) {
-        isValid = false;
-        placeDescriptionError.textContent = 'Enter place dexription';
-    }
-
-    if (!placePictureInput.value) {
-        isValid = false;
-        placePictureError.textContent = 'Provide picture';
-    }
-
-
-    return isValid;
-}
 
 
 function createStarRating(rating) {
@@ -61,7 +34,10 @@ function createStarRating(rating) {
 placeForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    if (validateForm()) {
+    if (validateForm(
+        placeNameInput, placeLocationInput,placeDescriptionInput, 
+        placeNameError, placeLocationError, placeDescriptionError,
+        )) {
         
         let form = new FormData();
 
@@ -77,14 +53,14 @@ placeForm.addEventListener("submit", (event) => {
 
 
         axios
-            .post('/create_post', form, {
+            .post('/places/create', form, {
                 headers: {
                     'content-type': 'multipart/form-data'
                 }
             })
             .then(res =>{
                 const place = res.data;
-                console.log(place)
+                console.log('place',place);
                 if (placesIsEmpty) {
                     placesIsEmpty.style.display = 'none'; 
                 }
@@ -94,7 +70,7 @@ placeForm.addEventListener("submit", (event) => {
                     <div class="place-info">
                         <div class="place-name">
                             Name: 
-                            <a href="/edit-place-page/${place._id}" class="edit-link">
+                            <a href="/places/${place._id}/edit-page" class="edit-link">
                                                 ${place.name}
                             </a> 
                         </div>
@@ -108,7 +84,7 @@ placeForm.addEventListener("submit", (event) => {
                     </div>
 
                     <div class="place-picture">
-                        <img src="/images/${place.picture}" alt="">
+                        <img src="/images/places/${place.picture}" alt="">
                     </div>
                 </div>
                 <div class="place-footer">
@@ -118,11 +94,29 @@ placeForm.addEventListener("submit", (event) => {
                     </p>
                 </div>
             </div>
-                `)
+                `);
+
+                boxMsg.textContent = 'Place item successfully created';
+                boxMsg.classList.add('success-msg');
+                boxMsg.style.display = 'block';
+
+                setTimeout(() => {
+                    boxMsg.style.display = 'none';
+                    boxMsg.classList.remove('success-msg');
+                }, 7500)
 
             })
             .catch(err => {
                 console.log(err)
+                boxMsg.textContent = err.response.data;
+                boxMsg.classList.add("form-error") ;
+                boxMsg.style.display = 'block'
+                setTimeout(() => {
+                    boxMsg.style.display = 'none';
+                    boxMsg.classList.remove("form-error") 
+        
+                }, 7500)
+
             })
     } else {
         setTimeout(() => {
@@ -130,6 +124,7 @@ placeForm.addEventListener("submit", (event) => {
             placeLocationError.textContent = '';
             placeDescriptionError.textContent = '';
             placePictureError.textContent = '';
+            boxMsg.style.display = 'none'
 
         }, 7500)
     }

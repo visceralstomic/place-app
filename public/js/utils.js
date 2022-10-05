@@ -1,3 +1,25 @@
+function validateForm(nameInput, locInput, descrInput, 
+                        nameError, locError, descError) {
+    let isValid = true;
+
+    if (!nameInput.value.trim()) {
+        isValid = false;
+        nameError.textContent = 'Enter place name';
+    }
+
+    if (!locInput.value.trim()) {
+        isValid = false;
+        locError.textContent = 'Enter place location';
+    }
+    
+    if (!descrInput.value.trim()) {
+        isValid = false;
+        descError.textContent = 'Enter place desription';
+    }
+
+    return isValid;
+}
+
 
 
 function activeStar(event) {

@@ -14,7 +14,7 @@
             <div class="wrapper">
                 <nav class="nav">
                     <h1 class="header-logo">
-                        <a href="/">Places App</a>
+                        <a href="/places">Places App</a>
                     </h1>
     
                     <div class="user-hello">
@@ -34,7 +34,7 @@
             
             <div class="edit-container">
                 <form class="form" id="edit-place-form" method="post" enctype="multipart/form-data"
-                action="/edit-place/<%=place._id %>">
+                action="/places/<%=place._id %>/edit">
                     <h2 class="form-title">Edit place</h2>
                     <div class="form-control">
                         <label for="edit-place-name-input">Name </label><br>
@@ -85,7 +85,7 @@
                         <span id="file-selected"><%= place.picture %></span>
                         <input type="file" name="picture" value="/images/<%= place.picture %>"
                                id="edit-place-picture-input" class="place-picture-input" accept="image/*" >
-                        <div class="form-field-error place-picture-error">
+                        <div class="form-field-error edit-place-picture-error">
                             
                         </div>
                     </div>
@@ -96,20 +96,20 @@
                         <textarea name="description" id="edit-place-description-input"
                                   class="place-description-input" ><%= place.description %>
                                 </textarea>
-                        <div class="form-field-error place-description-error">
+                        <div class="form-field-error edit-place-description-error">
                             
                         </div>
                     </div>
         
-                    <div class="">
-        
+                    <div class="<%= editPlaceError.length ? 'form-error' : '' %>" id="box-msg">
+                        <%= editPlaceError %>
                     </div>
         
                    
                 </form>
                 <div class="edit-btns">
                     <button class="form-btn" form="edit-place-form" type="submit">Edit</button>
-                    <form action="/delete-place/<%= place._id %>" method="POST" class="del-form">
+                    <form action="/places/<%= place._id %>/delete" method="POST" class="del-form">
                         <button class="form-btn del-btn" type="submit">Delete</button>
                     </form>
                 </div>
