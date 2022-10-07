@@ -7,6 +7,8 @@ const placePictureInput = document.querySelector('#place-picture-input');
 const placeList = document.querySelector('.places-list');
 const placesIsEmpty = document.querySelector('.places-empty');
 const fileSelected = document.querySelector('#file-selected');
+const openOForm = document.querySelector(".open-form");
+const placeFormContaier = document.querySelector(".places-form-container");
 
 const placeNameError = document.querySelector('.place-name-error');
 const placeLocationError = document.querySelector('.place-locations-error');
@@ -165,4 +167,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         })
     })
+})
+
+
+/* Place form container */
+
+
+openOForm.addEventListener('click', event => {
+    placeFormContaier.classList.toggle('active');
 })

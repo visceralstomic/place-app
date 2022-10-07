@@ -370,7 +370,10 @@ textarea {
 
 :root {
     --black-color: #171717;
-    --places-form-cont-width: 500px;
+    --places-form-cont-width: 35%;
+    --logo-font-size: 40px;
+    --header-padding: 15px;
+    --form-container-top: calc(var(--header-padding) * 2 + var(--logo-font-size));
 }
 
 
@@ -422,7 +425,7 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 15px 0;
+    padding: var(--header-padding) 0;
     z-index: 5;
 
 }
@@ -434,7 +437,7 @@ a {
 }
 
 .header-logo {
-    font-size: 40px;
+    font-size: var(--logo-font-size);
     font-weight: 900;
 }
 
@@ -461,6 +464,8 @@ a {
     width: 65%;
 }
 
+
+
 .hello-title {
     font-size: 50px;
     font-weight: 900;
@@ -472,7 +477,7 @@ a {
     font-size: 18px;
     letter-spacing: 1.5px;
     margin-bottom: 15px;
-    width: 600px;
+    max-width: 600px;
 }
 
 .hello-text p:last-child {
@@ -535,6 +540,20 @@ a {
     border-radius: 5px;
 }
 
+@media screen and (max-width: 648px) {
+    .hello-container {
+        flex-direction: column;
+    }
+
+    .hello-form, .hello-content, .hello-text p {
+        width: 100%;
+    }
+
+    
+}
+
+
+
 /* ----------------------------------------- */
 
 
@@ -544,14 +563,23 @@ a {
 
 .login-form-container {
     position: fixed;
-    top: 0;
+    top: var( --form-container-top);
     right: 0;
     left: 30%;
     height: 100%;
     background-color: var(--black-color);
     z-index: 10;
-    padding: 170px 150px 0 50px;
+    padding: 70px 150px 0 50px;
 
+}
+
+@media screen and (max-width: 648px) {
+    .login-form-container {
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-left: 20px;
+        left: 0;
+    }
 }
 
 /* ----------------------------------------------- */
@@ -564,15 +592,18 @@ a {
 
 .places-form-container {
     position: fixed;
-    height: 100%;
-    top: 70px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - var(--form-container-top));
+    top: var( --form-container-top);
     left: 0;
+    bottom: 150px;
     width: var(--places-form-cont-width);
     background-color: var(--black-color);
-    padding: 20px 10px 0 10px;
+    padding: 20px 10px 10px 10px;
     z-index: 3;
     overflow: auto;
-    scrollbar-color: rebeccapurple green;
+    transition: .1s ease-in;
 }    
 
 
@@ -614,6 +645,7 @@ a {
 .rating {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 5px;
 }
 
@@ -646,6 +678,7 @@ img {
 }
 
 .place-description-input {
+    
     font-size: 18px;
     color: white;
     margin-top: 7px;
@@ -731,7 +764,85 @@ img {
     color: grey;
 }
 
+.open-form {
+    cursor: pointer;
+    display: none;
+    align-self: flex-end;
+}
 
+@media screen and (max-width: 900px) {
+    :root {
+        --places-form-cont-width: 70px;
+    }
+
+    .main {
+        margin-top: 75px;
+    }
+    .open-form {
+        display: block;
+        width: 100%;
+        max-width: 70px;
+    }
+
+    .open-form img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .place-form {
+        display: none;
+    }
+
+    .places-form-container.active {
+        width: 100%;
+
+
+    }
+    .places-form-container.active .place-form {
+        display: block;
+    }
+
+    
+}
+
+
+@media screen and (max-width: 648px) {
+    :root {
+        --logo-font-size: 25px;
+    }
+
+    .place-header {
+        flex-direction: column-reverse;
+    }
+    .place-info, .place-picture {
+        width: 100%;
+    }
+
+    .place-picture {
+        margin-bottom: 10px;
+    }
+
+
+    .username {
+        font-size: 18px;
+    }
+
+    
+    .user-hello {
+        gap: 10px;
+    }
+
+    .open-form {
+        max-width: 45px;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --places-form-cont-width: 50px;
+    }
+}
 
 /* ------------------------------------------------ */
 
