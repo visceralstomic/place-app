@@ -17,6 +17,7 @@ const placePictureError = document.querySelector('.place-picture-error');
 const boxMsg = document.querySelector('#box-msg')
 
 
+
 let placeRating = 0;
 
 
@@ -55,11 +56,7 @@ placeForm.addEventListener("submit", (event) => {
 
 
         axios
-            .post('/places/create', form, {
-                headers: {
-                    'content-type': 'multipart/form-data'
-                }
-            })
+            .post('/places/create', form)
             .then(res =>{
                 const place = res.data;
                 console.log('place',place);

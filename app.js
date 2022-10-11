@@ -30,11 +30,18 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
 
 
+app.use(function(req, res, next) {
+    res.locals.user = req.session.user;
+    next();
+});
 
+app.get('/', (req,res) => {
+    res.redirect('places');
+});
 
 app.get('/login-page', (req, res) => {
     res.render('login-page', {errors: req.flash('errors')});
-})
+});
 
 app.use('/auth', authRouter);
 app.use('/places', mainRouter);

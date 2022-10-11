@@ -1,35 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    
-    <header class="header">
-        <div class="menu">
-            <div class="wrapper">
-                <nav class="nav">
-                    <h1 class="header-logo">
-                        <a href="/places">Places App</a>
-                    </h1>
-                    <div class="user-hello">
-                        <div class="username">
-                            Hello, <%= user.username %>
-                        </div>
-                        <form action="/auth/logout" method="post">
-                            <button type="submit" class="logout-btn">Logout</button>
-                        </form>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    
+<%- include('includes/header') %>
 
     <div class="main">
         <div class="wrapper">
@@ -103,7 +72,6 @@
                         <div class="" id="box-msg">
             
                         </div>
-            
                         <button class="form-btn" type="submit">Create</button>
                     </form>
                 </div>

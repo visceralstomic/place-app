@@ -7,7 +7,7 @@ const getAllPlaces = (req, res) => {
         PlaceModel
             .find({creator: user.id})
             .then(places => {
-                res.render('index', {user, places})
+                res.render('index', {places})
             })
             .catch( error => console.log(error));
     } else {
@@ -25,13 +25,13 @@ const createPlace = (req, res) => {
     }   
 
     const placeObj = new PlaceModel(placeBody);
-
     placeObj
         .save()
         .then(place => {
             res.status(201).json(place)
         })
         .catch(error => {
+
             let errorMsg = '';
 
             if (error.name === 'ValidationError') {
@@ -43,11 +43,10 @@ const createPlace = (req, res) => {
 
 
 const editPlacePage =  (req, res) => {
-    const {user} = req.session;
     PlaceModel
         .findOne({_id: req.params.id})
         .then(place => {
-            res.render('edit-page', {user, place, editPlaceError: req.flash('editPlaceError')})
+            res.render('edit-page', {place, editPlaceError: req.flash('editPlaceError')})
         })
         .catch(err => {
             console.log(err)
@@ -56,7 +55,6 @@ const editPlacePage =  (req, res) => {
 
 
 const deletePlace =  (req, res) => {
-    const {user} = req.session;
     PlaceModel
         .findOneAndDelete({_id: req.params.id})
         .then(place => {
@@ -68,7 +66,6 @@ const deletePlace =  (req, res) => {
 };
 
 const editPlace = (req, res) => {
-    const {user} = req.session;
     const placeData = req.body;
     
     if(req.file) {
