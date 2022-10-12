@@ -63,7 +63,7 @@ placeForm.addEventListener("submit", (event) => {
                 if (placesIsEmpty) {
                     placesIsEmpty.style.display = 'none'; 
                 }
-                placeList.insertAdjacentHTML('beforeend', `
+                placeList.insertAdjacentHTML('afterbegin', `
                 <div class="place-item">
                 <div class="place-header">
                     <div class="place-info">

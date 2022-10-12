@@ -46,6 +46,9 @@ app.get('/login-page', (req, res) => {
 app.use('/auth', authRouter);
 app.use('/places', mainRouter);
 
+app.get('*', (req, res) => {
+    res.render('404');
+})
 
 const PORT = process.env.PORT || 3000;
 

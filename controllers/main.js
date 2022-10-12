@@ -6,6 +6,7 @@ const getAllPlaces = (req, res) => {
         const {user} = req.session;
         PlaceModel
             .find({creator: user.id})
+            .sort({createdAt: -1})
             .then(places => {
                 res.render('index', {places})
             })
